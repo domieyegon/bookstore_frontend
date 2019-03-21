@@ -1,0 +1,99 @@
+<div class="container">
+  <div class="row">
+    <div class="col col-xs-8">
+      <h2 class="section-headline">
+        <span>My Profile</span>
+      </h2>
+    </div>
+    <div class="col-xs-4">
+      <img src="../../../assets/image/logo.png" class="img-responsive right" style="width: 400px; z-index: 1;" alt="">
+    </div>
+    <img src="../../../assets/image/wood.png" class="img-responsive right" style="position: absolute; margin-top: 90px; z-index: -2;" alt="">
+  </div>
+  <hr 
+      style="position:absolute; 
+      width: 85%; 
+      height: 6px; 
+      background-color: #333;
+      z-index: -1; 
+      margin-top: -170px;">
+
+      <div *ngIf="!dataFetched" style="margin-top: 50px">
+        <div class="row">
+          <div class="col-md-2 offset-md-5">
+            <mat-spinner></mat-spinner>
+          </div>
+        </div>
+      </div>
+       
+      <div class="row" style="margin-top: 30px">
+        <div class="col-md-3"></div>
+        <div class="col-md-9">
+          <div class="card-deck">
+            <div class="card" style="border: none">
+              <div class="card-body" style="background-color: #ededed">
+                <mat-tab-group [selectedIndex]="selectedProfileTab">
+                  <mat-tab label="Edit">
+                    <div style="margin-top: 50px">
+                      <div class="alert alert-danger" *ngIf="incorrectPassword">
+                        <strong>Incorrect Password!</strong> Please enter the correct password for the current user.
+                      </div>
+                      <div class="alert alert-success" *ngIf="updateSuccess">
+                        <strong>Updated Successfully</strong>
+                      </div>
+                    </div>
+                    <form (ngSubmit)="onUpdateUserInfo()">
+                      <input type="hidden" [(ngModel)]="user.id" name="id">
+                      <div class="bg-info" *ngIf= "updateUserInfo">
+                        User info updated.
+                      </div>
+                      <div class="form-group">
+                        <div class="row">
+                          <div class="col-md-6">
+                            <label for="firstName">First Name</label>
+                            <input type="text" class="form-control" name="firstname" id="firstName" [(ngModel)]="user.firstname">
+                          </div>
+                          <div class="col-md-6">
+                              <label for="lastName">Last Name</label>
+                              <input type="text" class="form-control" name="lastName" id="lastName" [(ngModel)]= "user.lastname">
+                            </div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                          <label for="username">Username *</label>&nbsp;
+                          <span *ngIf="usernameExists" style="color: red">Username already exixts. Choose a different one</span>
+                          <input type="text" class="form-control" name="username" id="username" [(ngModel)]= "user.username" required="required">
+                      </div>
+                      <div class="form-group">
+                          <label for="currentPassword">Current Password</label>
+                          <input type="password" class="form-control" name="password" id="password" [(ngModel)]= "currentPassword">
+                          <p style="color: #828282">Enter your current password to change the E-mail address or password.</p>
+                      </div>
+                      <div class="form-group">
+                          <label for="email">Email Address *</label>&nbsp;
+                          <span *ngIf="emailExists" style="color: red">Email address already exixts. Choose a different one</span>
+                          <input type="email" class="form-control" name="email" id="email" [(ngModel)]= "user.email" required="required">
+                          <p style="color: #828282">A valid Email address. All e-mails from the system will be sent to this email address.</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="txtNewPassword">New Password *</label>&nbsp;
+                            <span id="checkPasswordMatch"style="color: red"></span>
+                            <input type="password" class="form-control" name="txtNewPassword" id="txtNewPassword" [(ngModel)]= "newPassword" required="required">
+                        </div>
+                        <div class="form-group">
+                            <label for="txtNewPassword">Confirm New Password *</label>
+                            <input type="password" class="form-control" name="txtNewPassword" id="ctxtNewPassword">
+                        </div>
+                        <button mat-raised-button type="submit" class="mat-primary" id="updateUserInfoButton">Save</button>
+                    </form>
+                  </mat-tab>
+                  <mat-tab label="Payment">
+                    
+                  </mat-tab>
+                </mat-tab-group>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>

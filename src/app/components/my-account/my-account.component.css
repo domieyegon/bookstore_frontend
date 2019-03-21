@@ -1,0 +1,26 @@
+/* Styles for tab labels */
+::ng-deep.mat-tab-label {
+    min-width: 25px !important;
+    padding: 5px;
+    background-color: black;
+    color: white;
+    font-weight: 700;
+}
+
+/* Styles for the active tab label */
+::ng-deep.mat-tab-label.mat-tab-label-active {
+    min-width: 25px !important;
+    padding: 5px;
+    background-color: black;
+    color: white;
+    font-weight: 700;
+}
+
+/* Styles for the ink bar */
+::ng-deep.mat-ink-bar {
+    background-color: green;
+}
+
+::ng-deep p {
+  font-family: Lato;
+}

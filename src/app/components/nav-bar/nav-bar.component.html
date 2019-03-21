@@ -1,0 +1,40 @@
+<div class="page-top" style="width: 100%; height: 20px; background-color:#f46b42">
+</div>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+    <div class="navbar-header ">
+        <a [routerLink]="['/home']" class="navbar-brand pointer">LE's BOOKSTORE</a>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" mat-button [routerLink]="['/bookList']">BOOK</a>
+        </li>
+        <form class="form-inline" (ngSubmit)="onSearchByTitle()">
+            <div>
+              <input name="searchByTitle" [(ngModel)]= "keyboard" placeholder="Book Title" class="form-control mr-sm-2" type="search" aria-label="Search">
+              <button class="btn btn-outline-success  my-2 my-sm-0" type="submit">Search</button>
+            </div>
+        </form>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li *ngIf= "!loggedIn" class="nav-item active">
+         <a mat-button class="nav-link" [routerLink]="[ '/myAccount']">MY ACCOUNT</a>
+        </li>
+        <li *ngIf= "loggedIn" class="nav-item active">
+         <a mat-button class="nav-link" [routerLink]="[ '/shoppingCart']">SHOPPING CART</a>
+        </li>
+        <li *ngIf= "loggedIn" class="nav-item active">
+         <a mat-button class="nav-link" [routerLink]="[ '/myProfile']">MY PROFILE</a>
+        </li>
+        <li *ngIf= "loggedIn" class="nav-item active">
+         <a mat-button class="nav-link" (click)= "logout()">LOGOUT</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
