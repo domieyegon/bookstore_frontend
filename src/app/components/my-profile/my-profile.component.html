@@ -88,7 +88,40 @@
                     </form>
                   </mat-tab>
                   <mat-tab label="Payment">
-                    
+                    <br>
+                    <div>
+                      <p *ngIf="defaultPaymentSet">Default payment set successfully!</p>
+                      <mat-tab-group (selectedIndexChange)= "selectedBillingChange($event)" [selectedIndex]= "selectedBillingTab">
+                        <mat-tab label="List of Credit cards">
+                          <form (ngSubmit) = "setDefaultPayment()" method="POST">
+                            <table class="table">
+                              <thead>
+                                <th>Default</th>
+                                <th>Credit Card</th>
+                                <th>Operations</th>
+                              </thead>
+                              <tbody>
+                                <tr *ngFor="let userPayment of userPaymentList">
+                                  <dt>
+                                    <input type="radio" name="defaultUserPaymentId" [(ngModel)]="defaultUserPaymentId" [value]="userPayment.id">
+                                    <span>dafault</span>
+                                  </dt>
+                                  <td>
+                                    {{userPayment.cardName}}
+                                  </td>
+                                  <td>
+                                    <a mat-button (click)= "onUpdatePayment(userPayment)"><i class="fa fa-pencil"></i></a>
+                                    <a mat-button (click)= "onRemovePayment(userPayment)"><i class="fa fa-times"></i></a>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                            <button mat-raised-button class="mat-primary" type="submit">Save</button>
+                          </form>
+                        </mat-tab>
+                        <mat-tab label="TabTabHeader2"></mat-tab>
+                      </mat-tab-group>
+                    </div>
                   </mat-tab>
                 </mat-tab-group>
               </div>
