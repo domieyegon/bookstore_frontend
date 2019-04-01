@@ -3,11 +3,16 @@ import { NgModule } from '@angular/core';
 import 'hammerjs';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatButtonModule, MatCheckboxModule} from '@angular/material';
+import {MatButtonModule, MatCheckboxModule, MatTableDataSource, MatTable} from '@angular/material';
 import { FormsModule } from '@angular/forms';
 import {HttpModule} from '@angular/http';
+import {MatTableModule} from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+// import { DataTablesModule } from 'angular-datatables';
+import {DataTableModule} from "angular2-datatable";
+
+import { DataFilterPipe } from './components/book-list/data-filter-pipe';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,6 +25,12 @@ import { LoginService } from './services/login.service';
 import { UserService } from './services/user.service';
 import { PaymentService } from './services/payment.service';
 import { MyProfileComponent } from './components/my-profile/my-profile.component';
+import { ShippingService } from './services/shipping.service';
+import { BookListComponent } from './components/book-list/book-list.component';
+import { BookService } from './services/book.service';
+import { BookDetailComponent } from './components/book-detail/book-detail.component';
+import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
+import { CartService } from './services/cart.service';
 
 
 @NgModule({
@@ -28,7 +39,11 @@ import { MyProfileComponent } from './components/my-profile/my-profile.component
     NavBarComponent,
     HomeComponent,
     MyAccountComponent,
-    MyProfileComponent
+    MyProfileComponent,
+    BookListComponent,
+    DataFilterPipe,
+    BookDetailComponent,
+    ShoppingCartComponent
   ],
   imports: [
     BrowserModule,
@@ -40,12 +55,17 @@ import { MyProfileComponent } from './components/my-profile/my-profile.component
     MatButtonModule,
     MatTabsModule,
     MatCheckboxModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    DataTableModule,
+    MatTableModule
   ],
   providers: [
     LoginService,
     UserService,
-    PaymentService
+    PaymentService,
+    ShippingService,
+    BookService,
+    CartService
   ],
   bootstrap: [AppComponent]
 })

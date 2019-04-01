@@ -44,7 +44,7 @@ export class PaymentService {
     return this.http.post(url, id, {headers: tokenHeader});
   }
 
-  setDefaultPayment(id: string) {
+  setDefaultPayment(id: number) {
     let url = this.serverPath+ "/payment/setDefault";
 
     let tokenHeader = new Headers({

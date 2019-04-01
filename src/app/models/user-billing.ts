@@ -5,6 +5,6 @@ export class UserBilling {
     public userBillingStreet2: string;
     public userBillingCity: string;
     public userBillingState: string;
-    public userBillingcountry: string;
+    public userBillingCountry: string;
     public userBillingZipcode: string;
 }

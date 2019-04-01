@@ -3,10 +3,12 @@ import { AppConst } from '../../constants/app.const';
 import { User } from '../../models/user';
 import { UserBilling } from '../../models/user-billing';
 import { UserPayment } from '../../models/user-payment';
+import { UserShipping } from '../../models/user-shipping';
 import { Router } from '@angular/router';
 import {UserService} from '../../services/user.service';
 import {LoginService} from '../../services/login.service';
 import {PaymentService} from '../../services/payment.service';
+import {ShippingService} from '../../services/shipping.service';
 
 @Component({
   selector: 'app-my-profile',
@@ -28,20 +30,33 @@ export class MyProfileComponent implements OnInit {
   private currentPassword : string;
 
   private selectedBillingTab: number = 0;
-  private selecterProfileTab: number = 0;
+  private selectedProfileTab: number = 0;
+  private selectedShippingTab: number = 0;
 
   private userPayment: UserPayment = new UserPayment();
   private userBilling: UserBilling = new UserBilling();
   private userPaymentList: UserPayment[] = [];
   private defaultPaymentSet: boolean;
-  private defaultUserPaymentId: string;
+  private defaultUserPaymentId: number;
+  private stateList: string[] = [];
+
+  private userShipping : UserShipping =  new UserShipping();
+  private userShippingList: UserShipping[] = [];
+
+  private defaultUserShippingId : number;
+  private defaultShippingSet : boolean;
 
   constructor(
     private loginService : LoginService,
     private userService : UserService,
     private paymentService: PaymentService,
+    private shippingService : ShippingService,
     private router: Router
   ) { }
+
+  selectedShippingChange(val: number) {
+    this.selectedShippingTab = val;
+  }
 
   selectedBillingChange(val: number) {
     this.selectedBillingTab = val;
@@ -62,24 +77,12 @@ export class MyProfileComponent implements OnInit {
     );
   }
 
-  getCurrentUser() {
-    this.userService.getCurrentUser().subscribe (
-      res => {
-        this.user = res.json();
-        console.log(res.json());
-        this.dataFetched  = true;
-      },
-      err => {
-        console.log(err);
-      }
-      );
-  }
-
   onNewPayment() {
     this.paymentService.newPayment(this.userPayment).subscribe(
       res => {
         this.getCurrentUser();
         this.selectedBillingTab = 0;
+        this.userPayment =  new UserPayment();
       },
       err => {
         console.log(err.text());
@@ -87,15 +90,16 @@ export class MyProfileComponent implements OnInit {
     );
   }
 
-  onUpdatePayment(payment: UserPayment) {
-    this.userPayment = payment;
-    this.userBilling = payment.userBilling;
-    this.selectedBillingTab = 1; 
+  onUpdatePayment (payment: UserPayment) {
+  	this.userPayment = payment;
+  	this.userBilling = payment.userBilling;
+  	this.selectedBillingTab = 1;
   }
 
   onRemovePayment(id: number) {
     this.paymentService.removePayment(id).subscribe(
       res => {
+        console.log("Removed "+ id+ "and the response is "+ res);
         this.getCurrentUser();
       },
       err => {
@@ -110,12 +114,87 @@ export class MyProfileComponent implements OnInit {
       res => {
         this.getCurrentUser();
         this.defaultPaymentSet = true;
+       
       },
       err => {
         console.log(err.text());
       }
     );
 
+  }
+
+  onNewShipping() {
+    this.shippingService.newShipping(this.userShipping).subscribe(
+      res => {
+        console.log(res);
+        this.getCurrentUser();
+        this.selectedShippingTab = 0;
+        this.userShipping = new UserShipping();
+      },
+      err => {
+        console.log(err.text());
+      }
+    );
+  }
+
+  onUpdateShipping(shipping: UserShipping) {
+    this.userShipping = shipping;
+    this.selectedShippingTab = 1;
+  }
+
+  onRemoveShipping(id: number) {
+    this.shippingService.removeShipping(id).subscribe(
+      res => {
+        this.getCurrentUser();
+      },
+      err => {
+        console.log(err.text()); 
+      }
+    );
+  }
+
+  setDefaultShipping() {
+    this.defaultShippingSet = false;
+    this.shippingService.setDefaultShipping(this.defaultUserShippingId).subscribe(
+      res => {
+        this.getCurrentUser();
+        this.defaultShippingSet = true;
+       
+      },
+      err => {
+        console.log(err.text());
+      }
+    );
+
+  }
+
+  getCurrentUser() {
+    this.userService.getCurrentUser().subscribe (
+      res => {
+        this.user = res.json();
+        this.userPaymentList = this.user.userPaymentList;
+        this.userShippingList = this.user.userShippingList;
+
+        for (let index in this.userPaymentList) {
+          if (this.userPaymentList[index].defaultPayment) {
+            this.defaultUserPaymentId = this.userPaymentList[index].id;
+            break;
+          }
+        }
+
+        for (let index in this.userShippingList) {
+          if (this.userShippingList[index].userShippingDefault) {
+            this.defaultUserShippingId = this.userShippingList[index].id;
+            break;
+          }
+        }
+        console.log(res.json());
+        this.dataFetched  = true;
+      },
+      err => {
+        console.log(err);
+      }
+      );
   }
 
   ngOnInit() {
@@ -131,12 +210,19 @@ export class MyProfileComponent implements OnInit {
     );
     this.getCurrentUser();
 
+    for (let s in AppConst.usStates) {
+      this.stateList.push(s);
+    }
+
     this.userBilling.userBillingState = "";
     this.userPayment.type = "";
     this.userPayment.expiryMonth = "";
     this.userPayment.expiryYear = "";
     this.userPayment.userBilling = this.userBilling;
     this.defaultPaymentSet =  false;
+
+    this.userShipping.userShippingState = "";
+    this.userShipping.userShippingDefault = false;
 
   }
 
