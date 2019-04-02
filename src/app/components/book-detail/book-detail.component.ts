@@ -4,6 +4,7 @@ import { BookService } from 'src/app/services/book.service';
 import { Params, ActivatedRoute, Router } from '@angular/router';
 import { Http } from '@angular/http';
 import { AppConst } from '../../constants/app.const';
+import { CartService } from 'src/app/services/cart.service';
 
 @Component({
   selector: 'app-book-detail',
@@ -23,12 +24,23 @@ export class BookDetailComponent implements OnInit {
 
   constructor(
     private bookService: BookService,
+    private cartService: CartService,
     private router: Router,
     private http: Http,
     private route: ActivatedRoute
   ) { }
 
   onAddToCart() {
+    this.cartService.addItem(this.bookId, this.qty).subscribe(
+      res => {
+        console.log(res.text());
+        this.addBookSuccess = true;
+      },
+      err=> {
+        console.log(err.text());
+        this.notEnoughStock = true;
+      }
+    );
   }
 
   ngOnInit() {

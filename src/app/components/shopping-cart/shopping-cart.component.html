@@ -38,8 +38,9 @@
           <h4>Qty</h4>
         </div>
       </div>
+        
         <div class="row" *ngFor="let cartItem of cartItemList">
-          <hr>
+          <div class="col-md-12"><hr>dg</div>
           <div class="col-md-2">
             <a mat-button (click)="onSelect(cartItem.book)"><img class="img-responsive" src="{{serverPath}}/image/book/{{cartItem.book.id}}.png" alt="cart book image" style="width: 70px;"></a>
           </div>
@@ -48,7 +49,7 @@
             <p *ngIf="cartItem.book.inStockNumber > 10" style="color: green;"><span>{{cartItem.book.inStockNumber}}</span> In Stock</p>
             <p *ngIf="cartItem.book.inStockNumber < 10 && cartItem.book.inStockNumber > 0" style="color: blue;">Only <span>{{cartItem.book.inStockNumber}}</span> In Stock</p>
             <p *ngIf="cartItem.book.inStockNumber == 0" style="color: darkred;">Product Unavailable</p>
-            <a class="pointer" (click)= "onRemoveCartItem(cartItem)">delete</a>
+            <a class="pointer" (click)= "onRemoveCartItem(cartItem)" style="color: red">delete</a>
           </div>
           <div class="col-md-2">
             <h5 style="color: #db3208; font-size: large">$ <span [ngClass]="{'text-strike': cartItem.book.inStockNumber == 0}">{{cartItem.book.ourPrice}}</span></h5>
