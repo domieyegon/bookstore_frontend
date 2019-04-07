@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { AppConst } from '../../constants/app.const';
 import { Router, NavigationExtras } from '@angular/router';
 import { Book } from '../../models/book';
@@ -15,7 +15,6 @@ import { UserBilling } from '../../models/user-billing';
 import { UserShipping } from '../../models/user-shipping';
 import { Payment } from '../../models/payment';
 import { Order } from '../../models/order';
-
 @Component({
   selector: 'app-order',
   templateUrl: './order.component.html',

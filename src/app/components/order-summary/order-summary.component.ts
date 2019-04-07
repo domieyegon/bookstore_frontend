@@ -38,7 +38,7 @@ export class OrderSummaryComponent implements OnInit {
 
       let days = ["Sunday", "Monday", "Teusday", "Wednesday", "Thusday", "Friday", "Saturday"];
 
-      this.estimatedDeliveryDate = days[deliveryDate.getDate()]+ ',' +deliveryDate.getFullYear() + '/' +deliveryDate.getMonth()+ '/' +deliveryDate.getDate();
+      this.estimatedDeliveryDate = days[deliveryDate.getDay()]+ ',' +deliveryDate.getFullYear() + '/' +deliveryDate.getMonth()+ '/' +deliveryDate.getDate();
 
       this.cartItemList = this.order.cartItemList;
     });

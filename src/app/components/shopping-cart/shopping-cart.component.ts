@@ -73,7 +73,6 @@ export class ShoppingCartComponent implements OnInit {
   getShoppingCart() {
     this.cartService.getShoppingCart().subscribe(
       res => {
-        console.log(res.json);
        this.shoppingCart= res.json();
       },
       err => {

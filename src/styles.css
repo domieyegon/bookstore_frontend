@@ -18,15 +18,15 @@ body {
     padding-top: 0;
 }
 
-md-input-container {
+mat-input-container {
     width: 100%;
 }
 
-md-select {
+mat-select {
     width: 100%;
 }
 
-md-slide-toggle {
+mat-slide-toggle {
     width:100%;
 }
 
@@ -81,3 +81,13 @@ md-slide-toggle {
 .full-width {
 	width: 100%;
 }
+
+.mat-ink-bar{
+  background-color:#00ADEE !important;
+}
+.mat-tab-label{
+  color: #000000 !important;
+}
+.mat-tab-label-active{
+   color: #00ADEE !important;
+} 

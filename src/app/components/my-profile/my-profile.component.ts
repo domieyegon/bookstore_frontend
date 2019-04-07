@@ -11,6 +11,9 @@ import {PaymentService} from '../../services/payment.service';
 import {ShippingService} from '../../services/shipping.service';
 import { OrderService } from 'src/app/services/order.service';
 import { Order } from '../../models/order';
+import { Book } from 'src/app/models/book';
+import { CartItem } from 'src/app/models/cart-item';
+import { CartService } from 'src/app/services/cart.service';
 
 @Component({
   selector: 'app-my-profile',
@@ -52,12 +55,16 @@ export class MyProfileComponent implements OnInit {
   private order: Order= new Order();
   private displayOrderDetail: boolean;
 
+  private cartItemList: CartItem[] = [];
+
+
   constructor(
     private loginService : LoginService,
     private userService : UserService,
     private paymentService: PaymentService,
     private shippingService : ShippingService,
     private orderService : OrderService,
+    private cartItemService : CartService,
     private router: Router
   ) { }
 
@@ -204,10 +211,19 @@ export class MyProfileComponent implements OnInit {
       );
   }
 
-  onDisplayOrder (order: Order) {
+  onDisplayOrder (order: Order, book: Book) {
     console.log(order);
     this.order = order;
     this.displayOrderDetail = true;
+    this.cartItemService.getCartItemList().subscribe(
+      res => {
+        console.log("Books "+res.json());
+        this.cartItemList = res.json();
+      },
+      err => {
+        console.log(err.text());
+      }
+    )
   }
 
   ngOnInit() {
