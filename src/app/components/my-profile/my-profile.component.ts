@@ -206,6 +206,7 @@ export class MyProfileComponent implements OnInit {
 
   onDisplayOrder (order: Order) {
     console.log(order);
+    this.order = order;
     this.displayOrderDetail = true;
   }
 
@@ -224,13 +225,12 @@ export class MyProfileComponent implements OnInit {
 
     this.orderService.getOrderList().subscribe(
       res => {
-        console.log(res.json());
         this.orderList = res.json();
-      },
-      err => {
-        console.log(err.text());
-      }
-    );
+       },
+       error => {
+         console.log(error.text());
+       }
+     );
 
     for (let s in AppConst.usStates) {
       this.stateList.push(s);
