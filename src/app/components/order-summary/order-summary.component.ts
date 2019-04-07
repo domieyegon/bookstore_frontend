@@ -25,6 +25,7 @@ export class OrderSummaryComponent implements OnInit {
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
+      console.log(this.order);
       this.order = JSON.parse(params['order']);
 
       let deliveryDate = new Date();

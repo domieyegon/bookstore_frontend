@@ -14,8 +14,8 @@
   <hr style="position:absolute; width: 85%;  height: 6px; background-color: #333; z-index: -1; margin-top: -170px;">
 
   <div class="row" style="background-color: 120px;">
-    <div class="alert alert-success">
-      <h3><i class="fa f-check" style="color: limegreen"></i>
+    <div class="alert alert-success col-md-12">
+      <h3><i class="fa fa-check" style="color: limegreen"></i>
         Thank you, your order has been placed.
       </h3>
       <h4>
@@ -30,7 +30,6 @@
           <th>Products</th>
           <th>Price</th>
           <th>Quantity</th>
-          <th>Operation</th>
         </tr>
       </thead>
       <tbody>
@@ -63,9 +62,6 @@
             <div class="text-center">
               <h5 style="font-size: large;">{{cartItem.qty}} </h5>
             </div>
-          </td>
-          <td>
-            <a class="pointer" (click)="onRemoveCartItem(cartItem)" style="color: red">delete</a>
           </td>
         </tr>
       </tbody>
