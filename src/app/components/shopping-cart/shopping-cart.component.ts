@@ -64,6 +64,7 @@ export class ShoppingCartComponent implements OnInit {
       res => {
        this.cartItemList= res.json();
        this.cartItemNumber= this.cartItemList.length;
+       console.log(this.cartItemNumber);
       },
       err => {
         console.log(err.text());
@@ -98,6 +99,11 @@ export class ShoppingCartComponent implements OnInit {
   ngOnInit() {
     this.getCartItemList();
     this.getShoppingCart();
+    this.cartItemNumber= this.cartItemList.length;
+    console.log(this.cartItemNumber);
+    // if (this.cartItemNumber == 0){
+    //   this.emptyCart = true;
+    // }
   }
 
 

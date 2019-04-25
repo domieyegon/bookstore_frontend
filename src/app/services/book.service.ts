@@ -1,14 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import { AppConst } from '../constants/app.const';
-import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BookService {
-
-  private serverPath: string = AppConst.serverPath;
 
   constructor(private http: Http) { }
 

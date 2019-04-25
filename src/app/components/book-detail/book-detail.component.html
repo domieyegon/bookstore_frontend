@@ -16,7 +16,7 @@
   <a routerLink="/bookList"><i class="fa fa-arrow-left"></i> Back to book list</a>
   <div class="row" style="margin-top: 10px;" >
     <div class="col-md-3">
-      <img style="width: 200px" src="{{serverPath}}/image/book/{{book.id}}.png" class="img-responsive" alt="book image">
+      <img style="width: 200px" src="{{serverPath}}/image/book/{{book.id}}.png"  onError="this.src='../../../assets/image/No-image-available.jpg';"  class="img-responsive" alt="book image">
     </div>
     
     <div class="col-md-9">

@@ -32,18 +32,12 @@
             </div>
             <br>
     		<table class="table" [mfData]="bookList | dataFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
-    			<!-- <thead>
-    				<tr>
-              <th></th>
-              <th></th>
-    				</tr>
-    			</thead> -->
     			<tbody>
     				<tr *ngFor = "let book of mf.data">
               <td>
     						<div class="">
     							<a (click)="onSelect(book)" style="cursor:pointer;">
-    								<img class="img-responsive" style="width: 200px" src="{{serverPath}}/image/book/{{book.id}}.png" />
+    								<img class="img-responsive" style="width: 200px" src="{{serverPath}}/image/book/{{book.id}}.png"  onError="this.src='../../../assets/image/No-image-available.jpg';"  alt="no image" />
     							</a>
                 </div>
               </td>
